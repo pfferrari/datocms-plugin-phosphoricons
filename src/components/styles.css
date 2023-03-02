@@ -1,0 +1,94 @@
+.App {
+  padding: var(--spacing-m) var(--spacing-xl);
+  border: 1px solid var(--border-color);
+}
+.toggler {
+  color: #666;
+  cursor: pointer;
+}
+.toggler:hover {
+  color: black;
+}
+.pagination {
+  margin: 10px auto;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+.pages {
+  margin-top: 8px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+.pages > .btn {
+  margin: 0 2px;
+}
+.btn {
+  border-radius: 3px;
+  border: none;
+  cursor: pointer;
+  padding: 4px 8px;
+  color: white;
+}
+.search-input-wrapper {
+  max-width: 300px;
+  padding-bottom: 10px;
+  margin-top: 10px;
+}
+.btn:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+}
+.selected-icon,
+.icon {
+  padding: 4px 0;
+  cursor: pointer;
+  display: flex;
+  color: #666;
+}
+.selected-icon {
+  color: black;
+  cursor: initial;
+}
+.icon:hover {
+  color: black;
+}
+.remove-text {
+  color: red;
+  cursor: pointer;
+  margin: auto 0 auto 8px;
+}
+.selected-icon svg,
+.icon svg {
+  font-size: 20px;
+  margin: auto 0;
+}
+.selected-icon > div:first-child,
+.icon > div {
+  width: 40px;
+  min-width: 40px;
+  display: flex;
+  justify-content: center;
+}
+.selected-icon > span,
+.icon > span {
+  padding-left: 4px;
+  margin: auto 0;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
