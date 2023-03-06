@@ -1,6 +1,5 @@
 import {
   connect,
-  IntentCtx,
   OnBootCtx,
   RenderFieldExtensionCtx,
 } from "datocms-plugin-sdk";
@@ -9,32 +8,11 @@ import "datocms-react-ui/styles.css";
 import PhosphorIconsPicker from "./components/PhosphorIconsPicker";
 
 connect({
-  manualFieldExtensions(ctx: IntentCtx) {
-    return [
-      {
-        id: "phosphorIcons",
-        name: "Phosphor Icons",
-        type: "editor",
-        fieldTypes: ["text"],
-      },
-    ];
-  },
-  renderFieldExtension(fieldExtensionId: string, ctx: RenderFieldExtensionCtx) {
-    switch (fieldExtensionId) {
-      case "phosphorIcons":
-        return render(<PhosphorIconsPicker ctx={ctx} />);
-      default:
-        return null;
-    }
-  },
   async onBoot(ctx: OnBootCtx) {
-    // if we already performed the migration, skip
-    if (ctx.plugin.attributes.parameters.migratedFromLegacyPlugin) {
-      return;
-    }
-
-    // if the current user cannot edit fields' settings, skip
-    if (!ctx.currentRole.meta.final_permissions.can_edit_schema) {
+    if (
+      !ctx.currentRole.meta.final_permissions.can_edit_schema ||
+      ctx.plugin.attributes.parameters.migratedFromLegacyPlugin
+    ) {
       return;
     }
 
@@ -44,13 +22,14 @@ connect({
     // ... and for each of them...
     await Promise.all(
       fields.map(async (field: any) => {
-        // set the fieldExtensionId to be the new one
-        await ctx.updateFieldAppearance(field.id, [
-          {
-            operation: "updateEditor",
-            newFieldExtensionId: "phosphorIcons",
-          },
-        ]);
+        if (field.attributes.appearance.editor === ctx.plugin.id) {
+          await ctx.updateFieldAppearance(field.id, [
+            {
+              operation: "updateEditor",
+              newFieldExtensionId: "phosphorIcons",
+            },
+          ]);
+        }
       })
     );
 
@@ -59,5 +38,18 @@ connect({
       ...ctx.plugin.attributes.parameters,
       migratedFromLegacyPlugin: true,
     });
+  },
+  manualFieldExtensions() {
+    return [
+      {
+        id: "phosphorIcons",
+        name: "Phosphor Icons",
+        type: "editor",
+        fieldTypes: ["string"],
+      },
+    ];
+  },
+  renderFieldExtension(id: string, ctx: RenderFieldExtensionCtx) {
+    render(<PhosphorIconsPicker ctx={ctx} />);
   },
 });
