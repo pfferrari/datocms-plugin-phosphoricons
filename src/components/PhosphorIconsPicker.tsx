@@ -1,8 +1,7 @@
 import { RenderFieldExtensionCtx } from "datocms-plugin-sdk";
 import { FC, useState } from "react";
 import get from "lodash/get";
-
-import { icons } from "../icons/icons";
+import { icons as iconData } from "@phosphor-icons/core";
 
 import "./styles.css";
 import { Canvas, TextInput } from "datocms-react-ui";
@@ -25,24 +24,13 @@ const PhosphorIconsPicker: FC<Props> = ({ ctx }) => {
     ctx?.setFieldValue(ctx.fieldPath, icon ? icon : "");
   };
 
-  const allIcons = [...icons]
+  const allIcons = [...iconData]
     .filter((icon) => {
       if (searchTerm) {
-        return icon.indexOf(searchTerm.toLowerCase()) !== -1;
+        return icon.name.indexOf(searchTerm.toLowerCase()) !== -1;
       } else {
-        return icon;
+        return icon.name;
       }
-    })
-    .sort((a, b) => {
-      const aName = `${a}`;
-      const bName = `${b}`;
-
-      if (aName > bName) {
-        return 1;
-      } else if (aName < bName) {
-        return -1;
-      }
-      return 0;
     });
 
   const pageSize = 30;
@@ -83,7 +71,7 @@ const PhosphorIconsPicker: FC<Props> = ({ ctx }) => {
             key={`${selectedIcon}`}
           >
             <div>
-              <i className={`ph-${selectedIcon}-fill`}></i>
+              <i className={`ph-fill ph-${selectedIcon}`}></i>
             </div>
             <span>{selectedIcon}</span>
             <div
@@ -104,15 +92,15 @@ const PhosphorIconsPicker: FC<Props> = ({ ctx }) => {
               return (
                 <div
                   onClick={() =>
-                    handleIconClick(icon)
+                    handleIconClick(icon.name)
                   }
                   className="icon"
-                  key={icon}
+                  key={icon.name}
                 >
                   <div>
-                    <i className={`ph-${icon}-fill`}></i>
+                    <i className={`ph-fill ph-${icon.name}`}></i>
                   </div>
-                  <span>{icon}</span>
+                  <span>{icon.name}</span>
                 </div>
               );
             })}
@@ -133,7 +121,7 @@ const PhosphorIconsPicker: FC<Props> = ({ ctx }) => {
                     background: ctx?.theme.primaryColor || "black",
                   }}
                 >
-                  <i className="ph-caret-circle-double-left"></i>
+                  <i className="ph-fill ph-caret-circle-double-left"></i>
                 </button>
                 <button
                   onClick={() => setCurrentPage((s) => s - 1)}
@@ -143,7 +131,7 @@ const PhosphorIconsPicker: FC<Props> = ({ ctx }) => {
                     background: ctx?.theme.primaryColor || "black",
                   }}
                 >
-                  <i className="ph-caret-circle-left"></i>
+                  <i className="ph-fill ph-caret-circle-left"></i>
                 </button>
                 <button
                   disabled={currentPage === totalPages}
@@ -153,7 +141,7 @@ const PhosphorIconsPicker: FC<Props> = ({ ctx }) => {
                     background: ctx?.theme.primaryColor || "black",
                   }}
                 >
-                  <i className="ph-caret-circle-right"></i>
+                  <i className="ph-fill ph-caret-circle-right"></i>
                 </button>
                 <button
                   disabled={currentPage === totalPages}
@@ -163,7 +151,7 @@ const PhosphorIconsPicker: FC<Props> = ({ ctx }) => {
                     background: ctx?.theme.primaryColor || "black",
                   }}
                 >
-                  <i className="ph-caret-circle-double-right"></i>
+                  <i className="ph-fill ph-caret-circle-double-right"></i>
                 </button>
               </div>
             </div>
