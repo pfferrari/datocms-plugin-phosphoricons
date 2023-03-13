@@ -4,6 +4,7 @@
   "version": "0.0.1",
   "description": "An unofficial plugin that allows usage of Phosphor Icons in DatoCMS",
   "dependencies": {
+    "@phosphor-icons/core": "^2.0.2",
     "@types/node": "^16.11.26",
     "@types/react": "^17.0.43",
     "@types/react-dom": "^17.0.14",

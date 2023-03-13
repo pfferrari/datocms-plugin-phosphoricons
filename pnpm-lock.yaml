@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@phosphor-icons/core': ^2.0.2
   '@types/lodash': ^4.14.177
   '@types/node': ^16.11.26
   '@types/react': ^17.0.43
@@ -15,6 +16,7 @@ specifiers:
   typescript: ^4.6.3
 
 dependencies:
+  '@phosphor-icons/core': 2.0.2
   '@types/node': 16.18.14
   '@types/react': 17.0.53
   '@types/react-dom': 17.0.19
@@ -2038,6 +2040,10 @@ packages:
     dependencies:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.15.0
+    dev: false
+
+  /@phosphor-icons/core/2.0.2:
+    resolution: {integrity: sha512-ZHvHBagars5C2IGKW9TdiOe8LwIVq6/LmJRfxBlfFcbsNAfYXTNzf6IUQKy0hrPTn6bTdQh5ghe436i+W1JKrw==}
     dev: false
 
   /@pmmmwh/react-refresh-webpack-plugin/0.5.10_unmakpayn7vcxadrrsbqlrpehy:
