@@ -10,12 +10,8 @@ After installing the plugin, you'll need to add a new text field type to a block
 
 ## Output structure
 
-The data structure will be a string to identify the icon code:
+The value set by the field will be a string containing the icon code, like:
 
 ```
     arrows-counter-clockwise
 ```
-
-## Want to create your own custom DatoCMS plugin?
-
-Then follow this tutorial: https://youtu.be/vE6lmhZUNrQ
